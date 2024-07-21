@@ -7,7 +7,7 @@ on:
 
 jobs:
   maven-build-and-deploy:
-    uses: dmytro-kilchytskyi/workflows/maven-build-and-deploy.yml@main
+    uses: dmytro-kilchytskyi/workflows/.github/workflows/maven-build-and-deploy.yml@main
     with:
       container-name: 'monobank-integration'
     secrets: inherit
