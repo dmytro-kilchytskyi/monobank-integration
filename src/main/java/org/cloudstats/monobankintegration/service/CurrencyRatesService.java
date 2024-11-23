@@ -19,7 +19,7 @@ public class CurrencyRatesService {
     @Scheduled(cron = "@daily")
     public void triggerN8N() {
         List<CurrencyRate> rates = getCurrencyRates();
-        Event<List<CurrencyRate>> event = new Event<>(EventType.RATE, rates);
+        Event event = new Event(EventType.RATE, rates);
 
         n8nService.trigger(event);
     }

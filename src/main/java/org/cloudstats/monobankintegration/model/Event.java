@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Event<T> {
+public class Event {
     public EventType type;
-    public T data;
+    public Object data;
 }
