@@ -15,8 +15,8 @@ public class WebHookController {
     private final N8NService n8nService;
     private final GoogleAppsScriptService googleAppsScriptService;
 
-    @GetMapping
-    public void validate() {}
+    @GetMapping("/healthz")
+    public void healthCheck() {}
 
     @PostMapping
     public void processEvent(@RequestBody MonobankEvent event) {
