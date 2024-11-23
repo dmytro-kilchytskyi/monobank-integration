@@ -22,10 +22,8 @@ public class WebHookController {
     public void processEvent(@RequestBody MonobankEvent event) {
         if (event.getData().getStatementItem().getDescription().equals("Банкомат OTP")) {
             googleAppsScriptService.executeScript(event);
-            System.out.println("-> script triggered successfully🙂");
         } else {
             n8nService.trigger(new Event(EventType.LOG, event));
-            System.out.println("-> event logged successfully🙂");
         }
     }
 }
