@@ -1,8 +1,12 @@
 package org.cloudstats.monobankintegration.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 public class MonobankEvent {
 
     @lombok.Data
@@ -11,6 +15,7 @@ public class MonobankEvent {
     }
 
     @lombok.Data
+    @Builder
     public static class StatementItem {
         private int time;
         private String description;
