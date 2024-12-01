@@ -3,7 +3,7 @@ package org.cloudstats.monobankintegration.rest;
 import org.cloudstats.monobankintegration.model.Event;
 import org.cloudstats.monobankintegration.model.EventType;
 import org.cloudstats.monobankintegration.model.MonobankEvent;
-import org.cloudstats.monobankintegration.service.GoogleAppsScriptService;
+import org.cloudstats.monobankintegration.service.BufferedEventProcessorService;
 import org.cloudstats.monobankintegration.service.N8NService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,27 +12,18 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 @WebFluxTest(WebHookController.class)
 public class WebHookControllerTest {
     @Autowired
-    private WebHookController controller;
-
-    @Autowired
     private WebTestClient webTestClient;
 
     @MockBean
-    private GoogleAppsScriptService googleAppsScriptService;
+    private BufferedEventProcessorService bufferedEventProcessorService;
 
     @MockBean
     private N8NService n8nService;
-
-    @Test
-    public void shouldCreateWebHook() throws Exception {
-        assertThat(controller).isNotNull();
-    }
 
     @Test
     public void shouldPassHealthCheck() throws Exception {
@@ -55,7 +46,7 @@ public class WebHookControllerTest {
                 .expectStatus()
                 .isOk();
 
-        verify(googleAppsScriptService).executeScript(monobankEvent);
+        verify(bufferedEventProcessorService).process(monobankEvent);
     }
 
     @Test
